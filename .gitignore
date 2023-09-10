@@ -1,14 +1,14 @@
-.venv/
+.venv
 
 *.pyc
-__pycache__/
+__pycache__
 
-instance/
+instance
 
-.pytest_cache/
+.pytest_cache
 .coverage
-htmlcov/
+htmlcov
 
-dist/
-build/
-*.egg-info/
+dist
+build
+*.egg-info
