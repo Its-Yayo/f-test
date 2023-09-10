@@ -14,10 +14,10 @@ $ pip install flask
 If you wanna store F-test in your local, you can type the following commands with [git](https://git-scm.com/).
 ```shell
 $ git clone https://www.github.com/Its-Yayo/f-test.git
-$ cd Wterm
+$ cd f-test
 ```
 
-If you wanna update all changes of Wterm, you can type the following command.
+If you wanna update all changes of F-test, you can type the following command.
 ```shell
 $ git pull
 ```
