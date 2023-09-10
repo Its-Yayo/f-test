@@ -9,8 +9,6 @@ It uses [Flask](https://flask.palletsprojects.com/en/2.3.x/) as a modern framewo
 ```bash
 $ pip install flask
 ```
-## Usage 
-Soon...
 
 ## Local
 If you wanna store F-test in your local, you can type the following commands with [git](https://git-scm.com/).
@@ -23,3 +21,4 @@ If you wanna update all changes of Wterm, you can type the following command.
 ```shell
 $ git pull
 ```
+
