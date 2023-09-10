@@ -22,3 +22,6 @@ If you wanna update all changes of F-test, you can type the following command.
 $ git pull
 ```
 
+## License
+This project is under the [MiT](https://opensource.org/license/mit/) License
+
