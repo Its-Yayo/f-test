@@ -20,7 +20,6 @@ config = {
 try:
     conn = mariadb.connect(**config)
     cursor = conn.cursor()
-
     print("Connected to MariaDB F-Test") # Debug Message
 except mariadb.Error as e:
     print(f"Error connecting to MariaDB Platform: {e}")
