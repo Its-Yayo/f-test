@@ -1,5 +1,5 @@
 # F-test
-F-test is a simple web app test that handles a BMI calculator made with Flask. This simple project is made to learn Flask in a nutshell.
+F-test is a simple web app test that handles a register format to send data into a MariaDB Database made with Flask. This simple project is made to learn Flask in a nutshell.
 
 ## Frontend
 It uses JavaScript, HTML and CSS. You can install Node [here](https://nodejs.dev/en/download/).
