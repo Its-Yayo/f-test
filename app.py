@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from flask import Flask
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from dotenv import load_dotenv
 import mariadb
 import sys
@@ -28,7 +28,7 @@ except mariadb.Error as e:
 
 @app.route("/")
 def main() -> str:
-    return "TODO Implementation"
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
