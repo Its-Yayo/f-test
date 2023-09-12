@@ -1,6 +1,7 @@
-.venv
+/.venv
+/.queries
 .env
-.sql
+
 
 *.pyc
 __pycache__
