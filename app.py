@@ -25,6 +25,12 @@ except mariadb.Error as e:
     print(f"Error connecting to MariaDB Platform: {e}")
     sys.exit(1)
 
+@app.route("/add_user", methods=['POST'])
+def add_user() -> str:
+    if request.method == 'POST':
+        fullname = request.form['fullname']
+        phone = request.form['phone']
+        email = request.form['email']
 
 @app.route("/")
 def main() -> str:
