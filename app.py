@@ -6,6 +6,8 @@ import mariadb
 import sys
 import os
 
+from werkzeug import Response
+
 app = Flask(__name__)
 load_dotenv()
 
@@ -24,24 +26,35 @@ def connection() -> None:
         print("Connected to MariaDB F-Test") # Debug Message
         return conn
     except mariadb.Error as e:
-        print(f"Error connecting to MariaDB Platform: {e}")
+        print(f"Error Connecting to the MariaDB Database: {e}")
         sys.exit(1)
 
 @app.route("/add_user", methods=['POST'])
-def add_user() -> str:
+def add_user() -> Response:
     if request.method == 'POST':
         fullname = request.form['fullname']
         phone = request.form['phone']
         email = request.form['email']
 
-        return "Done"
+    try:
+        conn = connection()
+        cursor = conn.cursor()
+
+        cursor.callproc("insertContact", (fullname, phone, email))
+        conn.commit()
+        cursor.close()
+
+        flash("User Added Successfully", "success")
+        return redirect(url_for('main'))
+    except mariadb.Error as e:
+        flash(f"Error Adding to Users : {e}", "error")
+
 
 @app.route("/")
 def main() -> str:
     return render_template('index.html')
 
 if __name__ == '__main__':
-    connection()
     app.run()
     sys.exit(1)
 
