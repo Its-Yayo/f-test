@@ -35,6 +35,7 @@ def add_user() -> str:
         email = request.form['email']
 
         return "Done"
+
 @app.route("/")
 def main() -> str:
     return render_template('index.html')
