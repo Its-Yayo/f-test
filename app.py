@@ -34,16 +34,13 @@ def add_user() -> str:
         phone = request.form['phone']
         email = request.form['email']
 
-        if connection() is not None:
-            pass
-
-
+        return "Done"
 @app.route("/")
 def main() -> str:
     return render_template('index.html')
 
 if __name__ == '__main__':
     connection()
-    app.run(debug=True)
+    app.run()
     sys.exit(1)
 
