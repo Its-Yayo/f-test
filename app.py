@@ -9,21 +9,22 @@ import os
 app = Flask(__name__)
 load_dotenv()
 
-config = {
-    'host': os.getenv('DB_HOST'),
-    'port': int(os.getenv('DB_PORT')),
-    'user': os.getenv('DB_USERNAME'),
-    'password': os.getenv('DB_PASSWORD'),
-    'database': os.getenv('DB_NAME')
-}
+def connection() -> None:
+    config = {
+        'host': os.getenv('DB_HOST'),
+        'port': int(os.getenv('DB_PORT')),
+        'user': os.getenv('DB_USERNAME'),
+        'password': os.getenv('DB_PASSWORD'),
+        'database': os.getenv('DB_NAME')
+    }
 
-try:
-    conn = mariadb.connect(**config)
-    cursor = conn.cursor()
-    print("Connected to MariaDB F-Test") # Debug Message
-except mariadb.Error as e:
-    print(f"Error connecting to MariaDB Platform: {e}")
-    sys.exit(1)
+    try:
+        conn = mariadb.connect(**config)
+        cursor = conn.cursor()
+        print("Connected to MariaDB F-Test") # Debug Message
+    except mariadb.Error as e:
+        print(f"Error connecting to MariaDB Platform: {e}")
+        sys.exit(1)
 
 @app.route("/add_user", methods=['POST'])
 def add_user() -> str:
@@ -37,6 +38,7 @@ def main() -> str:
     return render_template('index.html')
 
 if __name__ == '__main__':
+    connection()
     app.run(debug=True)
     sys.exit(1)
 
