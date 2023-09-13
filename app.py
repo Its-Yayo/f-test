@@ -22,6 +22,7 @@ def connection() -> None:
         conn = mariadb.connect(**config)
         cursor = conn.cursor()
         print("Connected to MariaDB F-Test") # Debug Message
+        return conn
     except mariadb.Error as e:
         print(f"Error connecting to MariaDB Platform: {e}")
         sys.exit(1)
@@ -32,6 +33,10 @@ def add_user() -> str:
         fullname = request.form['fullname']
         phone = request.form['phone']
         email = request.form['email']
+
+        if connection() is not None:
+            pass
+
 
 @app.route("/")
 def main() -> str:
