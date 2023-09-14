@@ -1,16 +1,18 @@
 #!/usr/bin/python3
 
-from flask import Flask, Response, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from dotenv import load_dotenv
+from werkzeug import Response
 import mariadb
 import sys
 import os
 
-from werkzeug import Response
-
 app = Flask(__name__)
 load_dotenv()
 
+
+# Set the secret key to some random bytes. Keep this really secret!
+app.secret_key = os.getenv('DB_SECRET_KEY')
 
 def connection() -> mariadb.Connection:
     config = {

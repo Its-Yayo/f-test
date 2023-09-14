@@ -1,3 +1,14 @@
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>
+        {{ message }}
+    </p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+
 <form action="/add_user" method="post">
     <input type="text" name="fullname" placerholder="Full Name">
     <input type="text" name="phone" placerholder="Phone">
