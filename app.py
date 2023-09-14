@@ -10,7 +10,7 @@ app = Flask(__name__)
 load_dotenv()
 
 
-def connection() -> Response:
+def connection() -> mariadb.Connection:
     config = {
         'host': os.getenv('DB_HOST'),
         'port': int(os.getenv('DB_PORT')),
@@ -35,12 +35,21 @@ def add_user() -> str:
         phone = request.form['phone']
         email = request.form['email']
 
-        conn = connection()
-        cur = conn.cursor()
-        cur.callproc('insertContact', (fullname, phone, email))
-        conn.commit()
+        conn = None
 
-        return "Success"
+        try:
+            conn = connection()
+            cur = conn.cursor()
+            cur.callproc('insertContact', (fullname, phone, email))
+            conn.commit()
+            conn.close()
+            return "Success"
+        except mariadb.Error as e:
+            print(f"Error executing SQL: {e}")
+            return "Error"
+        finally:
+            if conn:
+                conn.close()
 
 
 @app.route("/")
@@ -50,4 +59,3 @@ def main() -> str:
 
 if __name__ == '__main__':
     app.run()
-    sys.exit(1)
