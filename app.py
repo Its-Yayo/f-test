@@ -42,7 +42,6 @@ def add_user() -> str:
             cur = conn.cursor()
             cur.callproc('insertContact', (fullname, phone, email))
             conn.commit()
-            conn.close()
             return "Success"
         except mariadb.Error as e:
             print(f"Error executing SQL: {e}")
