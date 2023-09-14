@@ -21,9 +21,7 @@ def connection() -> None:
 
     try:
         conn = mariadb.connect(**config)
-        cursor = conn.cursor()
         print("Connected to MariaDB F-Test") # Debug Message
-        return conn
     except mariadb.Error as e:
         print(f"Error Connecting to the MariaDB Database: {e}")
         sys.exit(1)
