@@ -13,7 +13,7 @@ load_dotenv()
 def connection() -> None:
     config = {
         'host': os.getenv('DB_HOST'),
-        'port': os.getenv('DB_PORT'),
+        'port': int(os.getenv('DB_PORT')),
         'user': os.getenv('DB_USERNAME'),
         'password': os.getenv('DB_PASSWORD'),
         'database': os.getenv('DB_NAME')
@@ -21,9 +21,9 @@ def connection() -> None:
 
     try:
         conn = mariadb.connect(**config)
-        print("Connected to MariaDB F-Test") # Debug Message
+        print("Connected") # Debug Message
     except mariadb.Error as e:
-        print(f"Error Connecting to the MariaDB Database: {e}")
+        print(f"Error Connecting: {e}")
         sys.exit(1)
 
 @app.route("/add_user", methods=['POST'])
@@ -34,11 +34,13 @@ def add_user() -> Response:
         email = request.form['email']
 
 
+
 @app.route("/")
 def main() -> str:
     return render_template('index.html')
 
 if __name__ == '__main__':
+    connection()
     app.run()
     sys.exit(1)
 
