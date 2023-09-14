@@ -36,6 +36,7 @@ def add_user() -> Response:
         email = request.form['email']
 
     try:
+        # FIXME: Cursor is not working
         connection()
         cur = connection().cursor()
 
