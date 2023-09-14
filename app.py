@@ -58,6 +58,10 @@ def add_user() -> Response | str:
 
 @app.route("/")
 def main() -> str:
+    conn = connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM contacts")
+
     return render_template('index.html')
 
 
