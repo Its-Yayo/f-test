@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 
-from flask import Flask, Response, render_template, request, redirect, url_for, session
+from flask import Flask, Response, render_template, request, redirect, url_for, flash, session
 from dotenv import load_dotenv
 import mariadb
 import sys
 import os
+
+from werkzeug import Response
 
 app = Flask(__name__)
 load_dotenv()
@@ -29,7 +31,7 @@ def connection() -> mariadb.Connection:
 
 
 @app.route("/add_user", methods=['POST'])
-def add_user() -> str:
+def add_user() -> Response | str:
     if request.method == 'POST':
         fullname = request.form['fullname']
         phone = request.form['phone']
@@ -42,10 +44,11 @@ def add_user() -> str:
             cur = conn.cursor()
             cur.callproc('insertContact', (fullname, phone, email))
             conn.commit()
-            return "Success"
+            flash("User Added Successfully")
+            return redirect(url_for('main'))
         except mariadb.Error as e:
             print(f"Error executing SQL: {e}")
-            return "Error"
+            return "Error executing SQL"
         finally:
             if conn:
                 conn.close()
