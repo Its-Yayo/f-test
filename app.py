@@ -61,8 +61,10 @@ def main() -> str:
     conn = connection()
     cur = conn.cursor()
     cur.execute("SELECT * FROM contacts")
+    data = cur.fetchall()
+    print(data)
 
-    return render_template('index.html')
+    return render_template('index.html', contacts=data)
 
 
 if __name__ == '__main__':
