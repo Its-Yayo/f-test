@@ -35,20 +35,6 @@ def add_user() -> Response:
         phone = request.form['phone']
         email = request.form['email']
 
-    try:
-        # FIXME: Cursor is not working
-        connection()
-        cur = connection().cursor()
-
-        cur.callproc("insertContact", (fullname, phone, email))
-        connection().commit()
-        cur.close()
-
-        flash("User Added Successfully", "success")
-        return redirect(url_for('main'))
-    except mariadb.Error as e:
-        flash(f"Error Adding to Users : {e}", "error")
-
 
 @app.route("/")
 def main() -> str:
