@@ -10,9 +10,9 @@ import os
 app = Flask(__name__)
 load_dotenv()
 
-
 # Set the secret key to some random bytes. Keep this really secret!
 app.secret_key = os.getenv('DB_SECRET_KEY')
+
 
 def connection() -> mariadb.Connection:
     config = {
