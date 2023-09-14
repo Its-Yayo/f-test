@@ -13,7 +13,7 @@ load_dotenv()
 def connection() -> None:
     config = {
         'host': os.getenv('DB_HOST'),
-        'port': int(os.getenv('DB_PORT')),
+        'port': os.getenv('DB_PORT'),
         'user': os.getenv('DB_USERNAME'),
         'password': os.getenv('DB_PASSWORD'),
         'database': os.getenv('DB_NAME')
@@ -36,12 +36,12 @@ def add_user() -> Response:
         email = request.form['email']
 
     try:
-        conn = connection()
-        cursor = conn.cursor()
+        connection()
+        cur = connection().cursor()
 
-        cursor.callproc("insertContact", (fullname, phone, email))
-        conn.commit()
-        cursor.close()
+        cur.callproc("insertContact", (fullname, phone, email))
+        connection().commit()
+        cur.close()
 
         flash("User Added Successfully", "success")
         return redirect(url_for('main'))
