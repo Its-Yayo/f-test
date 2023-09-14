@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from flask import Flask, Response, render_template, request, redirect, url_for, flash, session
+from flask import Flask, Response, render_template, request, redirect, url_for, session
 from dotenv import load_dotenv
 import mariadb
 import sys
