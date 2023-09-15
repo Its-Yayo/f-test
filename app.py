@@ -54,7 +54,7 @@ def add_user() -> Response | str:
                 conn.close()
 
 
-@app.route('/edit_contact/<id>', methods=['POST'])
+@app.route('/edit_contact/<id>', methods=['GET', 'POST'])
 def edit_user(id: int) -> str:
     conn = connection()
     cur = conn.cursor()
