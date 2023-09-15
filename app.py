@@ -55,10 +55,10 @@ def add_user() -> Response | str:
 
 
 @app.route('/edit_contact/<string:id>', methods=['POST'])
-def get_user(id: int) -> Response | str:
+def get_user(id: int) -> str:
     conn = connection()
     cur = conn.cursor()
-    cur.execute('SELECT * FROM contacts WHERE idcontacts = %s', id)
+    cur.execute('SELECT * FROM contacts WHERE idcontact = %s', id)
     data = cur.fetchall()
 
     return render_template('edit.html', contact=data[0])
@@ -68,7 +68,7 @@ def get_user(id: int) -> Response | str:
 def delete_user(id: int) -> Response:
     conn = connection()
     cur = conn.cursor()
-    cur.execute('DELETE FROM contacts WHERE idcontacts = {0}'.format(id))
+    cur.execute('DELETE FROM contacts WHERE idcontact = {0}'.format(id))
     conn.commit()
     flash("User Removed Successfully")
 
