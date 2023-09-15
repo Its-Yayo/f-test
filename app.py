@@ -39,8 +39,6 @@ def add_user() -> Response | str:
         phone = request.form['phone']
         email = request.form['email']
 
-        conn = None
-
         try:
             conn = connection()
             cur = conn.cursor()
@@ -62,8 +60,14 @@ def edit_user() -> Response | str:
 
 
 @app.route('/delete/<string:id>')
-def delete_user(id: int) -> int:
-    return id
+def delete_user(id: int) -> Response:
+    conn = connection()
+    cur = conn.cursor()
+    cur.execute('DELETE FROM contacts WHERE idcontacts = {0}'.format(id))
+    conn.commit()
+    flash("User Removed Successfully")
+
+    return redirect(url_for('main'))
 
 
 @app.route("/")
