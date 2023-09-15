@@ -9,7 +9,7 @@
 {% endwith %}
 
 
-<form action="/add" method="post">
+<form action="/add_contact" method="post">
     <input type="text" name="fullname" placerholder="Full Name">
     <input type="text" name="phone" placerholder="Phone">
     <input type="text" name="email" placerholder="Email">
@@ -32,8 +32,8 @@
             <td>{{ contact.2}}</td>
             <td>{{ contact.3}}</td>
             <td>
-                <a href="/edit>">Edit</a>
-                <a href="/delete/{{contact.0}}">Delete</a>
+                <a href="/edit_contact>">Edit</a>
+                <a href="/delete_contact/{{contact.0}}">Delete</a>
             </td>
         </tr>
     {% endfor %}
