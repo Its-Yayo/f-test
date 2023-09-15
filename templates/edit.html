@@ -1,6 +1,6 @@
-<form action="/" method="post">
-    <input type="text" name="fullname" placeholder="Full Name" value="{{ contact.1 }}">
-    <input type="text" name="phone" placeholder="Phone"> value="{{ contact.2 }}">
-    <input type="text" name="email" placeholder="Email"> value="{{ contact.3 }}">
+<form action="/add_contact" method="post">
+    <input type="text" name="fullname" placerholder="Full Name" value="{{contact.1}}">
+    <input type="text" name="phone" placerholder="Phone" value="{{contact.2}}">
+    <input type="text" name="email" placerholder="Email" value="{{contact.3}}">
     <button type="submit">Submit</button>
 </form>

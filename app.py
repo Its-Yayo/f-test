@@ -53,7 +53,7 @@ def add_user() -> Response | str:
             if conn:
                 conn.close()
 
-@app.route('/get_contact', methods=['POST'])
+@app.route('/edit_contact', methods=['POST'])
 def get_user(id: int) -> Response | str:
     conn = connection()
     cur = conn.cursor()
@@ -61,11 +61,6 @@ def get_user(id: int) -> Response | str:
     data = cur.fetchall()
 
     return render_template('edit.html', contact=data[0])
-
-
-@app.route('/edit_contact', methods=['POST'])
-def edit_user() -> Response | str:
-    ...
 
 
 @app.route('/delete_contact/<string:id>')
