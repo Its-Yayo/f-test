@@ -82,3 +82,4 @@ def main() -> str:
 
 if __name__ == '__main__':
     app.run()
+    sys.exit(1)
