@@ -32,7 +32,7 @@ def connection() -> mariadb.Connection:
         sys.exit(1)
 
 
-@app.route("/add_user", methods=['POST'])
+@app.route('/add', methods=['POST'])
 def add_user() -> Response | str:
     if request.method == 'POST':
         fullname = request.form['fullname']
@@ -54,6 +54,16 @@ def add_user() -> Response | str:
         finally:
             if conn:
                 conn.close()
+
+
+@app.route('/edit', methods=['POST'])
+def edit_user() -> Response | str:
+    ...
+
+
+@app.route('/delete/<string:id>')
+def delete_user(id: int) -> int:
+    return id
 
 
 @app.route("/")
