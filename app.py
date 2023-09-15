@@ -54,8 +54,13 @@ def add_user() -> Response | str:
                 conn.close()
 
 @app.route('/get_contact', methods=['POST'])
-def edit_user() -> Response | str:
-    ...
+def get_user(id: int) -> Response | str:
+    conn = connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM contacts WHERE idcontacts = %s', id)
+    data = cur.fetchall()
+
+    return render_template('edit.html', contact=data[0])
 
 
 @app.route('/edit_contact', methods=['POST'])
