@@ -55,7 +55,7 @@ def add_user() -> Response | str:
 
 
 @app.route('/edit_contact/<string:id>', methods=['POST'])
-def get_user(id: int) -> str:
+def edit_user(id: int) -> str:
     conn = connection()
     cur = conn.cursor()
     cur.execute('SELECT * FROM contacts WHERE idcontact = %s', id)
