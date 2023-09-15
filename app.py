@@ -53,7 +53,7 @@ def add_user() -> Response | str:
             if conn:
                 conn.close()
 
-@app.route('/edit_contact', methods=['POST'])
+@app.route('/edit_contact/<string:id>', methods=['POST'])
 def get_user(id: int) -> Response | str:
     conn = connection()
     cur = conn.cursor()
