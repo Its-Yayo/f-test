@@ -55,11 +55,11 @@ def add_user() -> Response | str:
 
 
 @app.route('/edit_contact/<string:id>', methods=['POST'])
-def edit_contact(id: int) -> str:
+def get_contact(id: int) -> str:
     # FIXME: 405 Method Not Allowed
     conn = connection()
     cur = conn.cursor()
-    cur.execute('SELECT * FROM contacts WHERE idcontact = %s', (id))
+    cur.execute('SELECT * FROM contacts WHERE idcontact = %d', (id))
     data = cur.fetchall()
     print(data)
 
