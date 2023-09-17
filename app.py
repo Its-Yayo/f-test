@@ -61,9 +61,9 @@ def get_contact(id: int) -> str:
     cur = conn.cursor()
     cur.execute('SELECT * FROM contacts WHERE idcontact = %d', (id))
     data = cur.fetchall()
-    print(data)
+    print(data[0]) # Debug Message
 
-    return render_template('edit.html', contacts=data[0])
+    return render_template('edit.html', contact=data[0])
 
 
 @app.route('/delete_contact/<string:id>')
