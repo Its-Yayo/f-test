@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="RegisterDB@f-test.cwa9rhwbm261.us-east-1.rds.amazonaws.com" uuid="19d1565e-8c90-4158-8bf1-64605d6d6f11">
+    <data-source source="LOCAL" name="f-test" uuid="19d1565e-8c90-4158-8bf1-64605d6d6f11">
       <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mariadb://f-test.cwa9rhwbm261.us-east-1.rds.amazonaws.com:3306/RegisterDB</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="@localhost" uuid="a7aa9afb-5987-43af-b08f-0c26dc151cef">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://localhost:3306</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
