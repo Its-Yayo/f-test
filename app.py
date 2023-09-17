@@ -54,7 +54,7 @@ def add_user() -> Response | str:
                 conn.close()
 
 
-@app.route("/edit_contact/<string:id>", methods=['POST'])
+@app.route("/edit_contact/<id>", methods=['POST'])
 def get_contact(id: int) -> str:
     # FIXME: 405 Method Not Allowed
     conn = connection()
