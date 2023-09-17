@@ -32,7 +32,7 @@ def connection() -> mariadb.Connection:
         sys.exit(1)
 
 
-@app.route('/add_contact', methods=['POST'])
+@app.route("/add_contact", methods=['POST'])
 def add_user() -> Response | str:
     if request.method == 'POST':
         fullname = request.form['fullname']
@@ -54,7 +54,7 @@ def add_user() -> Response | str:
                 conn.close()
 
 
-@app.route('/edit_contact/<string:id>', methods=['POST'])
+@app.route("/edit_contact/<string:id>", methods=['POST'])
 def get_contact(id: int) -> str:
     # FIXME: 405 Method Not Allowed
     conn = connection()
@@ -66,7 +66,7 @@ def get_contact(id: int) -> str:
     return render_template('edit.html', contact=data[0])
 
 
-@app.route('/delete_contact/<string:id>')
+@app.route("/delete_contact/<string:id>")
 def delete_contact(id: int) -> Response:
     conn = connection()
     cur = conn.cursor()
