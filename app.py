@@ -45,10 +45,11 @@ def add_user() -> Response | str:
             cur.callproc('insertContact', (fullname, phone, email))
             conn.commit()
             flash("User Added Successfully")
+
             return redirect(url_for('main'))
         except mariadb.Error as e:
             print(f"Error executing SQL: {e}")
-            return "Error executing SQL"
+            return "Error"
         finally:
             if conn:
                 conn.close()
@@ -64,6 +65,21 @@ def get_contact(id: int) -> str:
     print(data[0])  # Debug Message
 
     return render_template('edit.html', contact=data[0])
+
+
+@app.route("/update_contact/<id>", methods=['POST'])
+def update_contact(id: int) -> Response | str:
+    try:
+        conn = connection()
+        cur = conn.cursor()
+        cur.callproc('updateContact', (id, request.form['fullname'], request.form['phone'], request.form['email']))
+        conn.commit()
+        flash("User Updated Successfully")
+
+        return redirect(url_for('main'))
+    except mariadb.Error as e:
+        print(f"Error executing SQL: {e}")
+        return "Error"
 
 
 @app.route("/delete_contact/<string:id>")
