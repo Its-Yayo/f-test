@@ -72,7 +72,7 @@ def update_contact(id: int) -> Response | str:
         try:
             conn = connection()
             cur = conn.cursor()
-            cur.callproc('updateContact', (request.form['fullname'], request.form['phone'], request.form['email'], id))
+            cur.callproc('updateContact', (id, request.form['fullname'], request.form['phone'], request.form['email']))
             conn.commit()  # Error Here
             flash("User Updated Successfully")
 
@@ -80,6 +80,9 @@ def update_contact(id: int) -> Response | str:
         except mariadb.Error as e:
             print(f"Error executing SQL: {e}")
             return "Error"
+        finally:
+            if conn:
+                conn.close()
 
 
 @app.route("/delete_contact/<string:id>")
