@@ -72,7 +72,7 @@ def update_contact(id: int) -> Response | str:
     try:
         conn = connection()
         cur = conn.cursor()
-        cur.callproc('updateContact', (id, request.form['fullname'], request.form['phone'], request.form['email']))
+        cur.callproc('updateContact', (request.form['fullname'], request.form['phone'], request.form['email']))
         conn.commit()
         flash("User Updated Successfully")
 
