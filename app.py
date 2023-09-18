@@ -61,7 +61,7 @@ def get_contact(id: int) -> str:
     cur = conn.cursor()
     cur.execute('SELECT * FROM contacts WHERE idcontact = %d', (id))
     data = cur.fetchall()
-    print(data[0]) # Debug Message
+    print(data[0])  # Debug Message
 
     return render_template('edit.html', contact=data[0])
 
