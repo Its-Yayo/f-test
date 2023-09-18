@@ -57,7 +57,6 @@ def add_user() -> Response | str:
 
 @app.route("/edit_contact/<id>", methods=['GET'])
 def get_contact(id: int) -> str:
-    # FIXME: 405 Method Not Allowed
     conn = connection()
     cur = conn.cursor()
     cur.execute('SELECT * FROM contacts WHERE idcontact = %d', (id,))
@@ -69,11 +68,12 @@ def get_contact(id: int) -> str:
 
 @app.route("/update_contact/<id>", methods=['POST'])
 def update_contact(id: int) -> Response | str:
+    # FIXME: 404 Not Found
     if request.method == 'POST':
         try:
             conn = connection()
             cur = conn.cursor()
-            cur.callproc('updateContact', (request.form['fullname'], request.form['phone'], request.form['email']))
+            cur.callproc('updateContact', (id, request.form['fullname'], request.form['phone'], request.form['email']))
             conn.commit()
             flash("User Updated Successfully")
 
