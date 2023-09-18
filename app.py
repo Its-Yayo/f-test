@@ -32,7 +32,7 @@ def connection() -> mariadb.Connection:
         sys.exit(1)
 
 
-@app.route("/add_contact", methods=['POST'])
+@app.route("/add_contact", methods=['GET', 'POST'])
 def add_user() -> Response | str:
     if request.method == 'POST':
         fullname = request.form['fullname']
