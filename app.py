@@ -68,13 +68,12 @@ def get_contact(id: int) -> str:
 
 @app.route("/update_contact/<string:id>", methods=['POST'])
 def update_contact(id: int) -> Response | str:
-    # FIXME: 404 Not Found
     if request.method == 'POST':
         try:
             conn = connection()
             cur = conn.cursor()
-            cur.callproc('updateContact', ((id,), request.form['fullname'], request.form['phone'], request.form['email']))
-            conn.commit()
+            cur.callproc('updateContact', (request.form['fullname'], request.form['phone'], request.form['email'], id))
+            conn.commit()  # Error Here
             flash("User Updated Successfully")
 
             return redirect(url_for('main'))
