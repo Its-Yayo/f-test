@@ -55,7 +55,7 @@ def add_user() -> Response | str:
                 conn.close()
 
 
-@app.route("/edit_contact/<id>", methods=['GET'])
+@app.route("/edit_contact/<string:id>", methods=['GET'])
 def get_contact(id: int) -> str:
     conn = connection()
     cur = conn.cursor()
@@ -66,14 +66,14 @@ def get_contact(id: int) -> str:
     return render_template('edit.html', contact=data[0])
 
 
-@app.route("/update_contact/<id>", methods=['POST'])
+@app.route("/update_contact/<string:id>", methods=['POST'])
 def update_contact(id: int) -> Response | str:
     # FIXME: 404 Not Found
     if request.method == 'POST':
         try:
             conn = connection()
             cur = conn.cursor()
-            cur.callproc('updateContact', (id, request.form['fullname'], request.form['phone'], request.form['email']))
+            cur.callproc('updateContact', ((id,), request.form['fullname'], request.form['phone'], request.form['email']))
             conn.commit()
             flash("User Updated Successfully")
 
