@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="col-md-7">
-        <table class="table table-bordered table-striped bg-white table-responsive-sm">
+        <table class="table table-bordered table-borderless table-active bg-white table-responsive-sm">
             <thead>
                 <tr>
                     <td>FullName</td>
@@ -24,17 +24,17 @@
                 </tr>
             </thead>
             <tbody>
-            {% for contact in contacts %}
-                <tr>
-                    <td>{{ contact.1}}</td>
-                    <td>{{ contact.2}}</td>
-                    <td>{{ contact.3}}</td>
-                    <td>
-                        <a href='/edit_contact/{{ contact.0 }}'>Edit</a>
-                        <a href='/delete_contact/{{ contact.0 }}'>Delete</a>
-                    </td>
-                </tr>
-            {% endfor %}
+                {% for contact in contacts %}
+                    <tr>
+                        <td>{{ contact.1}}</td>
+                        <td>{{ contact.2}}</td>
+                        <td>{{ contact.3}}</td>
+                        <td>
+                            <a href='/edit_contact/{{ contact.0 }}' class="btn btn-secondary">Edit</a>
+                            <a href='/delete_contact/{{ contact.0 }}' class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
