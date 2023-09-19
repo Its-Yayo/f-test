@@ -2,6 +2,44 @@
 
 {% block body %}
 
+<div class="row">
+    <div class="col-md-5">
+        <div class="card card-body">
+            <form action="/add_contact" method="post">
+                <input type="text" name="fullname" placeholder="Full Name">
+                <input type="text" name="phone" placeholder="Phone">
+                <input type="text" name="email" placeholder="Email">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <table>
+            <thead>
+                <tr>
+                    <td>FullName</td>
+                    <td>Phone</td>
+                    <td>Email</td>
+                    <td>Operation</td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for contact in contacts %}
+                <tr>
+                    <td>{{ contact.1}}</td>
+                    <td>{{ contact.2}}</td>
+                    <td>{{ contact.3}}</td>
+                    <td>
+                        <a href='/edit_contact/{{ contact.0 }}'>Edit</a>
+                        <a href='/delete_contact/{{ contact.0 }}'>Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 {% for message in messages %}
@@ -14,37 +52,5 @@
 {% endfor %}
 {% endif %}
 {% endwith %}
-
-
-<form action="/add_contact" method="post">
-    <input type="text" name="fullname" placeholder="Full Name">
-    <input type="text" name="phone" placeholder="Phone">
-    <input type="text" name="email" placeholder="Email">
-    <button type="submit">Submit</button>
-</form>
-
-<table>
-    <thead>
-        <tr>
-            <td>FullName</td>
-            <td>Phone</td>
-            <td>Email</td>
-            <td>Operation</td>
-        </tr>
-    </thead>
-    <tbody>
-    {% for contact in contacts %}
-        <tr>
-            <td>{{ contact.1}}</td>
-            <td>{{ contact.2}}</td>
-            <td>{{ contact.3}}</td>
-            <td>
-                <a href='/edit_contact/{{ contact.0 }}'>Edit</a>
-                <a href='/delete_contact/{{ contact.0 }}'>Delete</a>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
 
 {% endblock %}
