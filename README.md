@@ -1,4 +1,6 @@
 # F-test
+![F-Test](/images/f-test_img.png)
+
 F-test is a simple web app test that handles a register format to send data into a MariaDB Database made with Flask. This simple project is made to learn Flask in a nutshell.
 
 ## Frontend
