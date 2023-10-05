@@ -1,38 +1,14 @@
 #!/usr/bin/python3
 
-from flask import Flask, render_template, request, redirect, url_for, flash
-from dotenv import load_dotenv
+from connection import connection
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from werkzeug import Response
 import mariadb
-import sys
-import os
 
-app = Flask(__name__)
-load_dotenv()
-
-# Set the secret key to some random bytes. Keep this really secret!
-app.secret_key = os.getenv('DB_SECRET_KEY')
+main = Blueprint('main', __name__, template_folder='app/templates')
 
 
-def connection() -> mariadb.Connection:
-    config = {
-        'host': os.getenv('DB_HOST'),
-        'port': int(os.getenv('DB_PORT')),
-        'user': os.getenv('DB_USERNAME'),
-        'password': os.getenv('DB_PASSWORD'),
-        'database': os.getenv('DB_NAME')
-    }
-
-    try:
-        conn = mariadb.connect(**config)
-        print("Connected")  # Debug Message
-        return conn
-    except mariadb.Error as e:
-        print(f"Error Connecting: {e}")
-        sys.exit(1)
-
-
-@app.route("/add_contact", methods=['GET', 'POST'])
+@main.route("/add_contact", methods=['GET', 'POST'])
 def add_user() -> Response | str:
     if request.method == 'POST':
         fullname = request.form['fullname']
@@ -46,7 +22,7 @@ def add_user() -> Response | str:
             conn.commit()
             flash("User Added Successfully")
 
-            return redirect(url_for('main'))
+            return redirect(url_for('main.root'))
         except mariadb.Error as e:
             print(f"Error executing SQL: {e}")
             return "Error"
@@ -55,7 +31,7 @@ def add_user() -> Response | str:
                 conn.close()
 
 
-@app.route("/edit_contact/<string:id>", methods=['GET'])
+@main.route("/edit_contact/<string:id>", methods=['GET'])
 def get_contact(id: int) -> str:
     conn = connection()
     cur = conn.cursor()
@@ -66,7 +42,7 @@ def get_contact(id: int) -> str:
     return render_template('edit.html', contact=data[0])
 
 
-@app.route("/update_contact/<string:id>", methods=['POST'])
+@main.route("/update_contact/<string:id>", methods=['POST'])
 def update_contact(id: int) -> Response | str:
     if request.method == 'POST':
         try:
@@ -76,7 +52,7 @@ def update_contact(id: int) -> Response | str:
             conn.commit()  # It worksssssssssssssss
             flash("User Updated Successfully")
 
-            return redirect(url_for('main'))
+            return redirect(url_for('main.root'))
         except mariadb.Error as e:
             print(f"Error executing SQL: {e}")
             return "Error"
@@ -85,7 +61,7 @@ def update_contact(id: int) -> Response | str:
                 conn.close()
 
 
-@app.route("/delete_contact/<string:id>")
+@main.route("/delete_contact/<string:id>")
 def delete_contact(id: int) -> Response:
     conn = connection()
     cur = conn.cursor()
@@ -93,19 +69,14 @@ def delete_contact(id: int) -> Response:
     conn.commit()
     flash("User Removed Successfully")
 
-    return redirect(url_for('main'))
+    return redirect(url_for('main.root'))
 
 
-@app.route("/")
-def main() -> str:
+@main.route("/")
+def root() -> str:
     conn = connection()
     cur = conn.cursor()
     cur.execute("SELECT * FROM contacts")
     data = cur.fetchall()
 
     return render_template('index.html', contacts=data)
-
-
-if __name__ == '__main__':
-    app.run()
-    sys.exit(1)
