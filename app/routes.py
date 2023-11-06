@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 from connection import connection
 from flask import Blueprint, render_template, request, redirect, url_for, flash
