@@ -9,6 +9,7 @@ __pycache__
 instance
 
 .pytest_cache
+.mypy_cache
 .coverage
 htmlcov
 
