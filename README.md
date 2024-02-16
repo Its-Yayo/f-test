@@ -28,8 +28,8 @@ $ git pull
 - Note, [vulnerability](https://github.com/advisories/GHSA-h5c8-rqwp-cp95) in Jinja template which allows users to inject arbitrary code, known as XSS (Cross-Site Scripting) in a HTML Jinja template. Low moderate severity. Id: [CVE-2024-22195](https://nvd.nist.gov/vuln/detail/CVE-2024-22195)
 
 # Releases
-- v2023-beta.1.0 (Sep 2023): Updates in UI interface for client. DB remotely set up for data handling
-- v2023-beta.2.0 (Oct 2023): Updates in code set and data error handlings. DB remotely set up for data handling
+- v2023-beta.1.0: Updates in UI interface for client. DB remotely set up for data handling
+- v2023-beta.2.0: Updates in code set and data error handlings. DB remotely set up for data handling
 
 ## License
 This project is under the [MiT](https://opensource.org/license/mit/) License
