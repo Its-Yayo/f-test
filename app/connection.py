@@ -7,6 +7,7 @@ import sys
 
 load_dotenv()
 
+
 # My connection through env variablesss
 def connection() -> mariadb.Connection:
     config = {
