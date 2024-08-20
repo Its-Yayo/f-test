@@ -1,3 +1,5 @@
+// Idk why this is not working, I'm checking it btw
+
 const btndelete = document.querySelectorAll('.btn-delete')
 
 if (btndelete) {
